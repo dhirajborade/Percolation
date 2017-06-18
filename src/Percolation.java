@@ -1,14 +1,42 @@
+
+/**********************************************************************************
+ *  Name: 		Dhiraj Vasant Borade
+ *  Course: 	Algorithms
+ *  University: Princeton University (Coursera)
+ *  
+ *  Compilation:  javac Percolation.java
+ *  Execution:    java Percolation inputSize (n) indexOfSiteToBeOpened (row, col)
+ *  Dependencies: None
+ *
+ *  This program takes grid size n and the row index and column index as the 
+ *  command line arguments
+ *  
+ *  It follows the following procedure,
+ *  	- Creates an n-by-n grid of sites (initially all blocked).
+ *  	- Add extra two sites as topIndex and bottomIndex as virtual sites to 
+ *  	  check connectivity between upper row and bottom row.
+ *  	- open a site based on the input row index and column index and connect 
+ *  	  it to its neighbor iff the neighbor is open, using union() method.
+ *  	- Also if the site is in the top row connect it to the topIndex and is 
+ *  	  the site is in the bottom row and connected to the topIndex, connect 
+ *  	  it to the bottomIndex.
+ *  	- check for variable percolates, if topIndex is connected to bottomIndex, 
+ *  	  make it true and the system percolates *  
+ *
+ **********************************************************************************/
+
+import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 
 public class Percolation {
 
-	private int rowLength;
-	private int gridSize;
+	private int rowLength; // size n
+	private int gridSize; // size n * n
 	private WeightedQuickUnionUF uf;
-	private boolean[] siteStatus;
-	private int topIndex;
-	private int bottomIndex;
+	private boolean[] siteStatus; // store the status of all the sites
+	private int topIndex; // virtual site connected to all the sites in the upper row
+	private int bottomIndex; // virtual site connected to all the sites in the bottom row
 	private int tempRow;
 	private int tempCol;
 	private int siteIndex;
@@ -152,14 +180,19 @@ public class Percolation {
 
 	// test client (optional)
 	public static void main(String[] args) {
-		Percolation perc = new Percolation(5);
-		perc.open(1, 1);
-		perc.open(2, 1);
-		perc.open(3, 1);
-		perc.open(4, 1);
-		StdOut.println(perc.isOpen(0));
-		StdOut.println(perc.isOpen(1, 1));
-		StdOut.println(perc.isFull(5, 1));
-		StdOut.println(perc.percolates());
+		StdOut.println("Enter the row length: ");
+		int n = StdIn.readInt();
+		Percolation perc = new Percolation(n);
+		while (!perc.percolates()) {
+			StdOut.println("Enter the site co-ordinates to be openend");
+			StdOut.println("X - Coordinate: ");
+			int x_coordinate = StdIn.readInt();
+			StdOut.println("Y - Coordinate: ");
+			int y_coordinate = StdIn.readInt();
+			perc.open(x_coordinate, y_coordinate);
+		}
+		if (perc.percolates()) {
+			StdOut.println("System percolates");
+		}
 	}
 }

@@ -1,3 +1,27 @@
+
+/******************************************************************************
+ *  Name: 		Dhiraj Vasant Borade
+ *  Course: 	Algorithms
+ *  University: Princeton University (Coursera)
+ *  
+ *  Compilation:  javac PercolationStats.java
+ *  Execution:    java PercolationStats inputSize (n) numberOfTrials (trials)
+ *  Dependencies: Percolation.java
+ *  
+ *  This program takes grid size n and the number of trials it needs to perform
+ *  as command line arguments.
+ *  
+ *  It follows the following procedure,
+ *  	- Creates an n-by-n grid of sites (initially all blocked).
+ *  	- Choose a site uniformly at random among all blocked sites and opens it.
+ *  	- calculate the percolation threshold from the fraction of sites that are 
+ *  	  opened when the system percolates.
+ *  	- Calculate the percolation threshold for "trials" number of times and
+ *  	  get the mean, standard deviation and 95% confidence interval for the 
+ *  	  percolation threshold.
+ *
+ ******************************************************************************/
+
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.StdRandom;
